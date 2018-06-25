@@ -5,8 +5,13 @@ $db = require __DIR__ . '/db.php';
 
 $config = [
     'id' => 'basic',
+    'name' => 'Library-books',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'layout' => 'main', // Шаблон используемый по умолчанию
+    'defaultRoute' => 'site/index', // Контроллер и действие используемые по умолчанию
+    'language' => 'ru RU',
+    'charset' => 'UTF-8',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
