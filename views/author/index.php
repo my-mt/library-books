@@ -4,19 +4,19 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\CatalogSearch */
+/* @var $searchModel app\models\AuthorSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Catalogs';
+$this->title = 'Authors';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="catalog-index">
+<div class="author-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Catalog', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Author', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -26,21 +26,16 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
+            'portrait:ntext',
             'name:ntext',
-            'author_id',
-            'description:ntext',
-            'section_id',
-            //'link_file:ntext',
-            //'year_made',
-            //'year_writing',
-            //'format',
-            //'language',
-            //'quantity',
-            //'place_id',
-            //'user_id',
-            //'cover:ntext',
-            //'images:ntext',
-            //'quality',
+            'surname:ntext',
+            'patronymic:ntext',
+            //'date_start',
+            //'place_start:ntext',
+            //'date_end',
+            //'place_end:ntext',
+            //'biography:ntext',
+            //'works:ntext',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

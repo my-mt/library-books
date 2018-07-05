@@ -4,19 +4,19 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\CatalogSearch */
+/* @var $searchModel app\models\SectionSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Catalogs';
+$this->title = 'Sections';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="catalog-index">
+<div class="section-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Catalog', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Section', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -27,20 +27,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'name:ntext',
-            'author_id',
+            'parent_section_id',
+            'cover:ntext',
             'description:ntext',
-            'section_id',
-            //'link_file:ntext',
-            //'year_made',
-            //'year_writing',
-            //'format',
-            //'language',
-            //'quantity',
-            //'place_id',
-            //'user_id',
-            //'cover:ntext',
-            //'images:ntext',
-            //'quality',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
