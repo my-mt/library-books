@@ -9,6 +9,8 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\RegForm;
+use app\models\User;
 
 class SiteController extends Controller
 {
@@ -124,5 +126,32 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+    
+    public function actionReg() {
+        $model = new RegForm(); //создаем объект модели RegForm
+        // если в объекте $model модели RegForm загрузились данные из массива $_POST и валидация на стороне сервера прошла успешно
+        if ($model->load(Yii::$app->request->post()) && $model->validate()):
+            if ($user = $model->reg()): // из метода reg() возвращается или объект пользователя (если он сохранисля в БД) или null. Загружаем возвращаемое значение в $user
+
+                if ($user->status === User::STATUS_ACTIVE): // если статус сохраненного пользователя - АКТИВНЫЙ ПОЛЬЗОВАТЕЛЬ
+
+                    if (Yii::$app->getUser()->login($user)): // проводим аунтификацию пользователя методом login() класса yii/web/User
+                        return $this->goHome(); // если аунтификация прошла успешно переходим на главную страницу сайта
+                    endif;
+                endif;
+            else:
+                Yii::$app->session->setFlash('error', 'Возникла ошибка при регистрации.');
+                Yii::error('Ошибка при регистрации');
+                return $this->refresh();
+                exit;
+            endif;
+        endif;
+
+
+        return $this->render(
+                        'reg', //выводим представление reg
+                        ['model' => $model] // передаем объект модели RegForm
+        );
     }
 }
