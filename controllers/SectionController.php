@@ -12,22 +12,8 @@ use yii\filters\VerbFilter;
 /**
  * SectionController implements the CRUD actions for Section model.
  */
-class SectionController extends Controller
+class SectionController extends BehaviorsController
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
 
     /**
      * Lists all Section models.

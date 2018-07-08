@@ -12,22 +12,8 @@ use yii\filters\VerbFilter;
 /**
  * AuthorController implements the CRUD actions for Author model.
  */
-class AuthorController extends Controller
+class AuthorController extends BehaviorsController
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
 
     /**
      * Lists all Author models.
