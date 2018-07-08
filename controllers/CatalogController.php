@@ -12,23 +12,8 @@ use yii\filters\VerbFilter;
 /**
  * CatalogController implements the CRUD actions for Catalog model.
  */
-class CatalogController extends Controller
+class CatalogController extends BehaviorsController
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
-
     /**
      * Lists all Catalog models.
      * @return mixed

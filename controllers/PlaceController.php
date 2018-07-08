@@ -12,22 +12,8 @@ use yii\filters\VerbFilter;
 /**
  * PlaceController implements the CRUD actions for Place model.
  */
-class PlaceController extends Controller
+class PlaceController extends BehaviorsController
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
 
     /**
      * Lists all Place models.
