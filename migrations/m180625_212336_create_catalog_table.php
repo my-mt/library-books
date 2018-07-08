@@ -21,7 +21,7 @@ class m180625_212336_create_catalog_table extends Migration
             'link_file' => $this->text(),
             'year_made' => $this->integer(4),
             'year_writing' => $this->integer(4),
-            'format' => $this->string(16),
+            'format_id' => $this->integer(10)->notNull(),
             'language' => $this->string(8),
             'quantity' => $this->integer(3)->notNull(),
             'place_id' => $this->integer(10)->notNull(),
@@ -34,6 +34,7 @@ class m180625_212336_create_catalog_table extends Migration
         $this->addForeignKey('catalog_author_id', 'catalog', 'author_id', 'author', 'id');
         $this->addForeignKey('catalog_section_id', 'catalog', 'section_id', 'section', 'id');
         $this->addForeignKey('catalog_place_id', 'catalog', 'place_id', 'place', 'id');
+        $this->addForeignKey('catalog_format_id', 'catalog', 'format_id', 'format', 'id');
     }
 
     /**
