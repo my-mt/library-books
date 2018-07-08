@@ -18,8 +18,8 @@ class CatalogSearch extends Catalog
     public function rules()
     {
         return [
-            [['id', 'author_id', 'section_id', 'year_made', 'year_writing', 'quantity', 'place_id', 'user_id', 'quality'], 'integer'],
-            [['name', 'description', 'link_file', 'format', 'language', 'cover', 'images'], 'safe'],
+            [['id', 'author_id', 'section_id', 'year_made', 'year_writing', 'quantity', 'place_id', 'user_id', 'quality', 'format_id'], 'integer'],
+            [['name', 'description', 'link_file', 'language', 'cover', 'images'], 'safe'],
         ];
     }
 
@@ -73,7 +73,7 @@ class CatalogSearch extends Catalog
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'link_file', $this->link_file])
-            ->andFilterWhere(['like', 'format', $this->format])
+            ->andFilterWhere(['like', 'format_id', $this->format_id])
             ->andFilterWhere(['like', 'language', $this->language])
             ->andFilterWhere(['like', 'cover', $this->cover])
             ->andFilterWhere(['like', 'images', $this->images]);

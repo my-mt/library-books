@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'link_file:ntext',
             'year_made',
             'year_writing',
-            'format',
+            'format_id',
             'language',
             'quantity',
             'place_id',

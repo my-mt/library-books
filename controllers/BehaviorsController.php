@@ -56,8 +56,8 @@ class BehaviorsController extends Controller {
                     // catalog
                     [
                         'allow' => true,
-                        'controllers' => ['catalog', 'place'],
-                        'actions' => ['catalog', 'place', 'post', 'section', 'author'],
+                        'controllers' => ['catalog', 'place', 'post', 'section', 'author'],
+                        'actions' => ['index', 'view', 'create', 'update', 'delete'],
                         'verbs' => ['POST', 'GET'],
                         'roles' => ['@']
                     ],

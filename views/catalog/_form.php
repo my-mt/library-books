@@ -26,7 +26,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'year_writing')->textInput() ?>
 
-    <?= $form->field($model, 'format')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'format_id')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'language')->textInput(['maxlength' => true]) ?>
 
