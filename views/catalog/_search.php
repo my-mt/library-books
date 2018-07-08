@@ -31,7 +31,7 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'year_writing') ?>
 
-    <?php // echo $form->field($model, 'format') ?>
+    <?php // echo $form->field($model, 'format_id') ?>
 
     <?php // echo $form->field($model, 'language') ?>
 

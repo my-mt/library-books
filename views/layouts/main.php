@@ -42,6 +42,7 @@ AppAsset::register($this);
             ['label' => 'Авторы', 'url' => ['/author/index']],
             ['label' => 'Разделы', 'url' => ['/section/index']],
             ['label' => 'Место', 'url' => ['/place/index']],
+            ['label' => 'Формат', 'url' => ['/format/index']],
             ['label' => 'Посты', 'url' => ['/post/index']],
             
 //            ['label' => 'Home', 'url' => ['/site/index']],

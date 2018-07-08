@@ -4,19 +4,19 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\CatalogSearch */
+/* @var $searchModel app\models\FormatSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Catalogs';
+$this->title = 'Formats';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="catalog-index">
+<div class="format-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Catalog', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Format', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -26,21 +26,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'name:ntext',
-            'author_id',
-            'description:ntext',
-            'section_id',
-            //'link_file:ntext',
-            //'year_made',
-            //'year_writing',
-            //'format_id',
-            //'language',
-            //'quantity',
-            //'place_id',
-            //'user_id',
-            //'cover:ntext',
-            //'images:ntext',
-            //'quality',
+            'format_str',
+            'created_at',
+            'updated_at',
+            'user_id',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
