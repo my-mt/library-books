@@ -58,4 +58,15 @@ class Format extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Catalog::className(), ['format_id' => 'id']);
     }
+    
+    public function saveModel($model)
+    {
+        if (!$model->created_at)
+            $model->created_at = time();
+        $model->updated_at = time();
+        $model->user_id = Yii::$app->user->id;
+        if ($model->save())
+            return true;
+    }
+
 }

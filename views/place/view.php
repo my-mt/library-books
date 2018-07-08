@@ -32,6 +32,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'place_name:ntext',
             'description:ntext',
             'images:ntext',
+            'created_at',
+            'updated_at',
+            'user_id',
         ],
     ]) ?>
 

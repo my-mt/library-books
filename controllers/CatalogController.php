@@ -50,8 +50,13 @@ class CatalogController extends BehaviorsController
     public function actionCreate()
     {
         $model = new Catalog();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $model->authorArr = $model->getAuthorArr();
+        $model->sectionArr = $model->getSectionArr();
+        $model->formatArr = $model->getFormatArr();
+        $model->placeArr = $model->getPlaceArr();
+        $model->quantity = 1;
+        
+        if ($model->load(Yii::$app->request->post()) && $model->saveModel($model)) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -70,8 +75,12 @@ class CatalogController extends BehaviorsController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->authorArr = $model->getAuthorArr();
+        $model->sectionArr = $model->getSectionArr();
+        $model->formatArr = $model->getFormatArr();
+        $model->placeArr = $model->getPlaceArr();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->saveModel($model)) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

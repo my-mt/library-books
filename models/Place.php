@@ -31,6 +31,8 @@ class Place extends \yii\db\ActiveRecord
     {
         return [
             [['place_name', 'description', 'images'], 'string'],
+            [['user_id'], 'required'],
+            [['created_at', 'updated_at', 'user_id'], 'integer'],
         ];
     }
 
@@ -44,6 +46,9 @@ class Place extends \yii\db\ActiveRecord
             'place_name' => 'Place Name',
             'description' => 'Description',
             'images' => 'Images',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
+            'user_id' => 'User ID',
         ];
     }
 
@@ -53,5 +58,15 @@ class Place extends \yii\db\ActiveRecord
     public function getCatalogs()
     {
         return $this->hasMany(Catalog::className(), ['place_id' => 'id']);
+    }
+    
+    public function saveModel($model)
+    {
+        if (!$model->created_at)
+            $model->created_at = time();
+        $model->updated_at = time();
+        $model->user_id = Yii::$app->user->id;
+        if ($model->save())
+            return true;
     }
 }

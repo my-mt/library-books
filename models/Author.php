@@ -39,6 +39,8 @@ class Author extends \yii\db\ActiveRecord
         return [
             [['portrait', 'name', 'surname', 'patronymic', 'place_start', 'place_end', 'biography', 'works'], 'string'],
             [['date_start', 'date_end'], 'safe'],
+            [['user_id','name'], 'required'],
+            [['created_at', 'updated_at', 'user_id'], 'integer'],
         ];
     }
 
@@ -59,6 +61,9 @@ class Author extends \yii\db\ActiveRecord
             'place_end' => 'Place End',
             'biography' => 'Biography',
             'works' => 'Works',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
+            'user_id' => 'User ID',
         ];
     }
 
@@ -68,5 +73,15 @@ class Author extends \yii\db\ActiveRecord
     public function getCatalogs()
     {
         return $this->hasMany(Catalog::className(), ['author_id' => 'id']);
+    }
+    
+    public function saveModel($model)
+    {
+        if (!$model->created_at)
+            $model->created_at = time();
+        $model->updated_at = time();
+        $model->user_id = Yii::$app->user->id;
+        if ($model->save())
+            return true;
     }
 }

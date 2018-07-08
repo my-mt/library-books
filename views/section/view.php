@@ -33,6 +33,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'parent_section_id',
             'cover:ntext',
             'description:ntext',
+            'created_at',
+            'updated_at',
+            'user_id',
         ],
     ]) ?>
 

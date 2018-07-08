@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use app\models\Section;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\CatalogSearch */
@@ -25,7 +26,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            //'id',
+            [
+              'label' => 'Раздел',
+              'attribute' => 'section_view',
+              'filter' => Section::find()->select(['name'])->indexBy('name')->column(),
+              'value' => 'section.name',
+            ],
             'name:ntext',
             'author_id',
             'description:ntext',

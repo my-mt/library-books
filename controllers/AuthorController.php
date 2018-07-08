@@ -52,7 +52,7 @@ class AuthorController extends BehaviorsController
     {
         $model = new Author();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->saveModel($model)) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -72,7 +72,7 @@ class AuthorController extends BehaviorsController
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->saveModel($model)) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

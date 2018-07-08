@@ -12,6 +12,7 @@ use app\models\Catalog;
  */
 class CatalogSearch extends Catalog
 {
+    public $section;
     /**
      * {@inheritdoc}
      */
@@ -19,7 +20,7 @@ class CatalogSearch extends Catalog
     {
         return [
             [['id', 'author_id', 'section_id', 'year_made', 'year_writing', 'quantity', 'place_id', 'user_id', 'quality', 'format_id'], 'integer'],
-            [['name', 'description', 'link_file', 'language', 'cover', 'images'], 'safe'],
+            [['name', 'description', 'link_file', 'language', 'cover', 'images', 'section_view'], 'safe'],
         ];
     }
 
@@ -42,12 +43,18 @@ class CatalogSearch extends Catalog
     public function search($params)
     {
         $query = Catalog::find();
+        $query->joinWith('section');
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+
+        $dataProvider->sort->attributes['section_view'] = [
+          'asc' => ['section.name' => SORT_ASC],
+          'desc' => ['section.name' => SORT_DESC],
+        ];
 
         $this->load($params);
 
@@ -76,7 +83,8 @@ class CatalogSearch extends Catalog
             ->andFilterWhere(['like', 'format_id', $this->format_id])
             ->andFilterWhere(['like', 'language', $this->language])
             ->andFilterWhere(['like', 'cover', $this->cover])
-            ->andFilterWhere(['like', 'images', $this->images]);
+            ->andFilterWhere(['like', 'images', $this->images])
+            ->andFilterWhere(['like', 'section.name', $this->section_view]);
 
         return $dataProvider;
     }

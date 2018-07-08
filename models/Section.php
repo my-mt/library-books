@@ -32,8 +32,8 @@ class Section extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'cover', 'description'], 'string'],
-            [['parent_section_id'], 'required'],
-            [['parent_section_id'], 'integer'],
+            [['parent_section_id', 'user_id'], 'required'],
+            [['parent_section_id', 'created_at', 'updated_at', 'user_id'], 'integer'],
         ];
     }
 
@@ -48,6 +48,9 @@ class Section extends \yii\db\ActiveRecord
             'parent_section_id' => 'Parent Section ID',
             'cover' => 'Cover',
             'description' => 'Description',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
+            'user_id' => 'User ID',
         ];
     }
 
@@ -57,5 +60,15 @@ class Section extends \yii\db\ActiveRecord
     public function getCatalogs()
     {
         return $this->hasMany(Catalog::className(), ['section_id' => 'id']);
+    }
+    
+    public function saveModel($model)
+    {
+        if (!$model->created_at)
+            $model->created_at = time();
+        $model->updated_at = time();
+        $model->user_id = Yii::$app->user->id;
+        if ($model->save())
+            return true;
     }
 }

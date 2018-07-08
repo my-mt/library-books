@@ -14,8 +14,9 @@ class m180625_212336_create_catalog_table extends Migration
     {
         $this->createTable('catalog', [
             'id' => $this->primaryKey(),
-            'name' => $this->text(224),
+            'name' => $this->string(255),
             'author_id' => $this->integer(10)->notNull(),
+            'joint_authors_id' => $this->string(255),
             'description' => $this->text(),
             'section_id' => $this->integer(10)->notNull(),
             'link_file' => $this->text(),
@@ -26,8 +27,8 @@ class m180625_212336_create_catalog_table extends Migration
             'quantity' => $this->integer(3)->notNull(),
             'place_id' => $this->integer(10)->notNull(),
             'user_id' => $this->integer(11)->notNull(),
-            'cover' => $this->text(224),
-            'images' => $this->text(224),
+            'cover' => $this->text(255),
+            'images' => $this->text(255),
             'quality' => $this->integer(1),   
         ]);
         $this->addForeignKey('catalog_user_id', 'catalog', 'user_id', 'user', 'id');

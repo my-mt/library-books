@@ -12,22 +12,8 @@ use yii\filters\VerbFilter;
 /**
  * FormatController implements the CRUD actions for Format model.
  */
-class FormatController extends Controller
+class FormatController extends BehaviorsController
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
 
     /**
      * Lists all Format models.
@@ -66,7 +52,7 @@ class FormatController extends Controller
     {
         $model = new Format();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->saveModel($model)) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -86,7 +72,7 @@ class FormatController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->saveModel($model)) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
