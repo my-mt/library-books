@@ -18,6 +18,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'name')->textarea(['rows' => 1]) ?>
     
     <?= $form->field($model, 'author_id')->dropDownList($model->authorArr)->label('Автор');?>
+        
+    <?= $form->field($model, 'joint_authors_id')->dropDownList($model->authorArr, ['multiple' => true])->label('Соавторы');?>
 
     <?= $form->field($model, 'description')->textarea(['rows' => 3]) ?>
 

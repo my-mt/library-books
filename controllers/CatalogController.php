@@ -55,9 +55,12 @@ class CatalogController extends BehaviorsController
         $model->formatArr = $model->getFormatArr();
         $model->placeArr = $model->getPlaceArr();
         $model->quantity = 1;
-        
-        if ($model->load(Yii::$app->request->post()) && $model->saveModel($model)) {
-            return $this->redirect(['view', 'id' => $model->id]);
+  
+        if ($model->load(Yii::$app->request->post())) {
+            $model->user_id = Yii::$app->user->id;
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
         return $this->render('create', [
@@ -74,14 +77,21 @@ class CatalogController extends BehaviorsController
      */
     public function actionUpdate($id)
     {
+
         $model = $this->findModel($id);
         $model->authorArr = $model->getAuthorArr();
         $model->sectionArr = $model->getSectionArr();
         $model->formatArr = $model->getFormatArr();
         $model->placeArr = $model->getPlaceArr();
-
-        if ($model->load(Yii::$app->request->post()) && $model->saveModel($model)) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        
+        if ($model->load(Yii::$app->request->post())) {
+            $joint_authors_id = Yii::$app->request->post('Catalog')['joint_authors_id'];
+            if (is_array($joint_authors_id)) {
+                $model->joint_authors_id = implode(',', $joint_authors_id);
+            }
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
         return $this->render('update', [

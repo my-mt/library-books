@@ -60,7 +60,7 @@ class Catalog extends \yii\db\ActiveRecord
             [['author_id', 'section_id', 'quantity', 'place_id', 'user_id'], 'required'],
             [['author_id', 'section_id', 'year_made', 'year_writing', 'quantity', 'place_id', 'user_id', 'quality', 'format_id'], 'integer'],
             [['language'], 'string', 'max' => 8],
-            [['joint_authors_id'], 'string', 'max' => 255],
+//            [['joint_authors_id'], 'string', 'max' => 255],
             [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => Author::className(), 'targetAttribute' => ['author_id' => 'id']],
             [['place_id'], 'exist', 'skipOnError' => true, 'targetClass' => Place::className(), 'targetAttribute' => ['place_id' => 'id']],
             [['section_id'], 'exist', 'skipOnError' => true, 'targetClass' => Section::className(), 'targetAttribute' => ['section_id' => 'id']],
@@ -161,17 +161,20 @@ class Catalog extends \yii\db\ActiveRecord
         return $result;
     }
     
-    public function saveModel($model)
-    {
-        if (!$model->created_at)
-            $model->created_at = time();
-        if (!$model->joint_authors_id)
-            $model->joint_authors_id = '';
-        $model->updated_at = time();
-        $model->user_id = Yii::$app->user->id;
-        if ($model->save())
-            return true;
+    public function beforeSave($insert)
+    {   
+        if (!$this->joint_authors_id)
+            $this->joint_authors_id = '';
+        if ($insert) {
+            $this->created_at = time();
+        }
+        $this->updated_at = time();
+        return true;
     }
     
+//    echo '<pre>';
+//    print_r($this);
+//    echo '</pre>';
+//    exit;
 
 }
