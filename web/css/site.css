@@ -113,3 +113,8 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+#list-author {
+    margin: 0 0 15px 15px; 
+}
+

@@ -57,10 +57,10 @@ class Catalog extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'description', 'link_file', 'cover', 'images'], 'string'],
-            [['author_id', 'section_id', 'quantity', 'place_id', 'user_id'], 'required'],
+            [['section_id', 'quantity', 'place_id', 'user_id'], 'required'],
             [['author_id', 'section_id', 'year_made', 'year_writing', 'quantity', 'place_id', 'user_id', 'quality', 'format_id'], 'integer'],
             [['language'], 'string', 'max' => 8],
-//            [['joint_authors_id'], 'string', 'max' => 255],
+            [['joint_authors_id'], 'string', 'max' => 255],
             [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => Author::className(), 'targetAttribute' => ['author_id' => 'id']],
             [['place_id'], 'exist', 'skipOnError' => true, 'targetClass' => Place::className(), 'targetAttribute' => ['place_id' => 'id']],
             [['section_id'], 'exist', 'skipOnError' => true, 'targetClass' => Section::className(), 'targetAttribute' => ['section_id' => 'id']],
@@ -90,7 +90,7 @@ class Catalog extends \yii\db\ActiveRecord
             'cover' => 'Обложка',
             'images' => 'Изображения',
             'quality' => 'Качество',
-            'joint_authors_id' => 'Соавторы',
+            'joint_authors_id' => 'Автор(ы)',
         ];
     }
 
@@ -163,8 +163,6 @@ class Catalog extends \yii\db\ActiveRecord
     
     public function beforeSave($insert)
     {   
-        if (!$this->joint_authors_id)
-            $this->joint_authors_id = '';
         if ($insert) {
             $this->created_at = time();
         }

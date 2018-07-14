@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
               'value' => 'section.name',
             ],
             'name:ntext',
-            'author_id',
+            'joint_authors_id',
             'description:ntext',
             'section_id',
             //'link_file:ntext',
