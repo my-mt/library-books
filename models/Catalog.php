@@ -42,6 +42,8 @@ class Catalog extends \yii\db\ActiveRecord
     public $placeArr;
     
     public $section_view;
+    public $format_view;
+    public $author_view;
     /**
      * {@inheritdoc}
      */
@@ -99,7 +101,7 @@ class Catalog extends \yii\db\ActiveRecord
      */
     public function getAuthor()
     {
-        return $this->hasOne(Author::className(), ['id' => 'author_id']);
+        return $this->hasOne(Author::className(), ['id' => 'joint_authors_id']);
     }
 
     /**
@@ -116,6 +118,11 @@ class Catalog extends \yii\db\ActiveRecord
     public function getSection()
     {
         return $this->hasOne(Section::className(), ['id' => 'section_id']);
+    }
+    
+    public function getFormat()
+    {
+        return $this->hasOne(Format::className(), ['id' => 'format_id']);
     }
 
     /**

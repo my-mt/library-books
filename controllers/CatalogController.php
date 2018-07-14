@@ -37,8 +37,10 @@ class CatalogController extends BehaviorsController
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+        $model->author_view = 'name-1<br>name-2';
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
         ]);
     }
 

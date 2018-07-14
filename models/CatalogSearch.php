@@ -20,7 +20,7 @@ class CatalogSearch extends Catalog
     {
         return [
             [['id', 'author_id', 'section_id', 'year_made', 'year_writing', 'quantity', 'place_id', 'user_id', 'quality', 'format_id'], 'integer'],
-            [['name', 'description', 'link_file', 'language', 'cover', 'images', 'section_view'], 'safe'],
+            [['name', 'description', 'link_file', 'language', 'cover', 'images', 'section_view', 'format_view', 'author_view'], 'safe'],
         ];
     }
 
@@ -44,6 +44,8 @@ class CatalogSearch extends Catalog
     {
         $query = Catalog::find();
         $query->joinWith('section');
+        $query->joinWith('format');
+        $query->joinWith('author');
 
         // add conditions that should always apply here
 
@@ -54,6 +56,16 @@ class CatalogSearch extends Catalog
         $dataProvider->sort->attributes['section_view'] = [
           'asc' => ['section.name' => SORT_ASC],
           'desc' => ['section.name' => SORT_DESC],
+        ];
+        
+        $dataProvider->sort->attributes['format_view'] = [
+          'asc' => ['format.format_str' => SORT_ASC],
+          'desc' => ['format.format_str' => SORT_DESC],
+        ];
+        
+        $dataProvider->sort->attributes['author_view'] = [
+          'asc' => ['author.surname' => SORT_ASC],
+          'desc' => ['author.surname' => SORT_DESC],
         ];
 
         $this->load($params);
@@ -77,14 +89,16 @@ class CatalogSearch extends Catalog
             'quality' => $this->quality,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
+        $query->andFilterWhere(['like', 'catalog.name', $this->name])
             ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'link_file', $this->link_file])
             ->andFilterWhere(['like', 'format_id', $this->format_id])
             ->andFilterWhere(['like', 'language', $this->language])
             ->andFilterWhere(['like', 'cover', $this->cover])
             ->andFilterWhere(['like', 'images', $this->images])
-            ->andFilterWhere(['like', 'section.name', $this->section_view]);
+            ->andFilterWhere(['like', 'section.name', $this->section_view])
+            ->andFilterWhere(['like', 'format.format_str', $this->format_view])
+            ->andFilterWhere(['like', 'author.surname', $this->author_view]);
 
         return $dataProvider;
     }

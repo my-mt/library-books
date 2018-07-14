@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use app\models\Author;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Catalog */
@@ -30,7 +31,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'name:ntext',
-            'author_id',
+//            'author_id',
+            [
+            'label' => 'Автор(ы)',
+            'format' => 'raw',
+            'value' => $model->author_view,
+            ],
             'joint_authors_id',
             'description:ntext',
             'section_id',
