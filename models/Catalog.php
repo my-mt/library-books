@@ -7,7 +7,9 @@ use app\models\Author;
 use app\models\Section;
 use app\models\Format;
 use app\models\Place;
+use app\models\User;
 use yii\helpers\ArrayHelper;
+use yii\imagine\Image;
 
 /**
  * This is the model class for table "catalog".
@@ -41,9 +43,12 @@ class Catalog extends \yii\db\ActiveRecord
     public $formatArr;
     public $placeArr;
     
+    public $cover_file;// переменная для загрузки фотографии
+    
     public $section_view;
     public $format_view;
     public $author_view;
+    public $user_view;
     /**
      * {@inheritdoc}
      */
@@ -177,6 +182,73 @@ class Catalog extends \yii\db\ActiveRecord
         return true;
     }
     
+    public function saveCover()
+    {
+        if ($this->cover) $this->deleteImg($this->cover);
+        $dir_photo = Yii::$app->params['dir_img_book']; // создаем путь
+        $name_photo = $this->id . '-' . time() . '.' . $this->cover_file->extension; // имя и расширение
+        $this->cover_file->saveAs($dir_photo . $name_photo); // сохраняем файл (изображение)
+        $this->cover = $name_photo; //пишем в модель имя изобр.
+        $this->cover_file = null;
+        $this->save(); // сохраняем модель, в том числе и имя изображения
+
+        $size = getimagesize($dir_photo . $name_photo); //получаем размер загруженного изображения [0]-ширина изображения [1] - высота изображения
+        $factor = 4; //коэф уменьшения исходного изображения
+        $width_img = (int) ($size[0] / $factor);
+        $height_img = (int) ($size[1] / $factor);
+
+        // сохраняем миниатюру
+        Image::thumbnail($dir_photo . $name_photo, $width_img, $height_img)
+                ->save(Yii::getAlias($dir_photo . 'thumbnail/' . $name_photo), ['quality' => 80]);
+    }
+    
+    public function deleteImg($name)
+    {
+        if (file_exists(Yii::$app->params['dir_img_book'] . $name))
+            unlink(Yii::$app->params['dir_img_book'] . $name); // удаляем фото
+        if (file_exists(Yii::$app->params['dir_img_book'] . 'thumbnail/' . $name))
+            unlink(Yii::$app->params['dir_img_book'] . 'thumbnail/' . $name); // удаляем миниатюру
+    }
+    
+    // получить список авторов
+    public function getJointAuthorsList () {
+        $result = '';
+        $authorArr = $this->getAuthorArr();
+        $joint_authors_id_cat = explode(',', $this->joint_authors_id);
+        $br = '';
+        foreach ($joint_authors_id_cat as $k => $v) {
+            if (!$v) continue;
+            $result  .= $br.$authorArr[$v];
+            $br = '<br>';
+        }
+        
+        return $result;
+    }
+    
+    // получить название раздела
+    public function getSectionName()
+    {
+        $section = Section::findOne($this->section_id);
+        $result = $section->name;
+        return $result;
+    }
+
+    // получить название формата
+    public function getFormatName()
+    {
+        $format = Format::findOne($this->format_id);
+        $result = $format->format_str;
+        return $result;
+    }
+
+    // получить имя пользователя
+    public function getUserName()
+    {
+        $user = User::findOne($this->user_id);
+        $result = $user->email;
+        return $result;
+    }
+
 //    echo '<pre>';
 //    print_r($this);
 //    echo '</pre>';

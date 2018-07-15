@@ -5,6 +5,7 @@ use yii\grid\GridView;
 use app\models\Section;
 use app\models\Format;
 use app\models\Author;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\CatalogSearch */
@@ -62,22 +63,28 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             'name:ntext',
-//            'joint_authors_id',
-//            'description:ntext',
-//            'section_id',
-            //'link_file:ntext',
             'year_made',
-//            'year_writing',
-//            'format_id',
-//            'language',
-            //'quantity',
-            //'place_id',
-            //'user_id',
-            //'cover:ntext',
-            //'images:ntext',
-            //'quality',
-
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+        	'label' => '',
+		'format' => 'raw',
+                'value' => function ($data) {
+                 return Html::img(Yii::$app->params['dir_img_book'].'thumbnail/'.$data->cover, [
+                    'style' => 'height:100px;',
+               ]);
+              },
+            ],
+            [
+                'label' => '',
+                'format' => 'raw',
+                'value' => function ($data) {
+                if ($data->link_file) {
+                    return '<a target="_blank" href="'.$data->link_file.'" class="glyphicon glyphicon-link"></a>';
+                } else {
+                    return '';
+                }
+                }
+            ],
+    ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
 </div>

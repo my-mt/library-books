@@ -8,6 +8,7 @@ use app\models\CatalogSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * CatalogController implements the CRUD actions for Catalog model.
@@ -38,7 +39,11 @@ class CatalogController extends BehaviorsController
     public function actionView($id)
     {
         $model = $this->findModel($id);
-        $model->author_view = 'name-1<br>name-2';
+        $model->author_view = $model->getJointAuthorsList();
+        $model->section_view = $model->getSectionName();
+        $model->format_view = $model->getFormatName();
+        $model->user_view = $model->getUserName();
+
         return $this->render('view', [
             'model' => $model,
         ]);
@@ -79,14 +84,17 @@ class CatalogController extends BehaviorsController
      */
     public function actionUpdate($id)
     {
-
         $model = $this->findModel($id);
         $model->authorArr = $model->getAuthorArr();
         $model->sectionArr = $model->getSectionArr();
         $model->formatArr = $model->getFormatArr();
         $model->placeArr = $model->getPlaceArr();
-        
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            if ($model->cover_file = UploadedFile::getInstance($model, 'cover_file')){
+                $model->saveCover();
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

@@ -118,3 +118,7 @@ a.desc:after {
     margin: 0 0 15px 15px; 
 }
 
+img.img-thumbnail {
+    max-height: 150px;
+}
+

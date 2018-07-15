@@ -31,26 +31,40 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'name:ntext',
-//            'author_id',
             [
             'label' => 'Автор(ы)',
             'format' => 'raw',
             'value' => $model->author_view,
             ],
-            'joint_authors_id',
-            'description:ntext',
-            'section_id',
-            'link_file:ntext',
+            [
+            'label' => 'Обложка',
+            'format' => 'raw',
+            'value' => '<img class="img-thumbnail" src="' . Yii::$app->params['dir_img_book'] . $model->cover . '">',
+            ],
+            [
+            'label' => 'Раздел',
+            'format' => 'raw',
+            'value' => $model->section_view,
+            ],
+            [
+            'label' => 'Ссылка',
+            'format' => 'raw',
+            'value' => '<a target="_blank" href="'.$model->link_file.'">Скачать</a>',
+            ],
+            [
+            'label' => 'Формат',
+            'format' => 'raw',
+            'value' => $model->format_view,
+            ],
             'year_made',
             'year_writing',
-            'format_id',
-            'language',
             'quantity',
-            'place_id',
-            'user_id',
-            'cover:ntext',
-            'images:ntext',
-            'quality',
+            'description:ntext',
+            [
+            'label' => 'Пользователь',
+            'format' => 'raw',
+            'value' => $model->user_view,
+            ],
         ],
     ]) ?>
 

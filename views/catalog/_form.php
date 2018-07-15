@@ -26,6 +26,7 @@ use yii\widgets\ActiveForm;
         $joint_authors_id_cat = explode(',', $model->joint_authors_id);
         $br = '';
         foreach ($joint_authors_id_cat as $k => $v) {
+            if (!$v) continue;
             echo $br.$model->authorArr[$v];
             $br = '<br>';
         }
@@ -41,34 +42,48 @@ use yii\widgets\ActiveForm;
     </select>
     </div>
 
-    <?= $form->field($model, 'description')->textarea(['rows' => 3]) ?>
+    
 
-    <?= $form->field($model, 'section_id')->dropDownList($model->sectionArr)->label('Раздел');?>
 
-    <?= $form->field($model, 'link_file')->textarea(['rows' => 1]) ?>
+    <div class="row">
+    <div class="col-sm-6">
+        <?= $form->field($model, 'section_id')->dropDownList($model->sectionArr)->label('Раздел');?>
+    </div>
+    <div class="col-sm-6">
+        <?= $form->field($model, 'link_file')->textarea(['rows' => 1]) ?>
+    </div>
 
-    <?= $form->field($model, 'year_made')->textInput() ?>
+     
 
-    <?= $form->field($model, 'year_writing')->textInput() ?>
+    <div class="col-sm-6">
+        <?= $form->field($model, 'year_made')->textInput() ?>
+    </div>
+    <div class="col-sm-6">
+        <?= $form->field($model, 'year_writing')->textInput() ?>
+    </div>
+    
         
+    <div class="col-sm-6">
+        <?= $form->field($model, 'format_id')->dropDownList($model->formatArr)->label('Формат');?>
+    </div>
+    <div class="col-sm-6">
+        <?= $form->field($model, 'quantity')->textInput() ?>
+    </div>
+        
+    </div>
     </div>    
     
     <div class="col-sm-6">
-
-    <?= $form->field($model, 'format_id')->dropDownList($model->formatArr)->label('Формат');?>
-
-    <?= $form->field($model, 'language')->dropDownList(['RU' => 'Русский']) ?>
-
-    <?= $form->field($model, 'quantity')->textInput() ?>
-
-    <?= $form->field($model, 'place_id')->dropDownList($model->placeArr)?>
-
-    <?= $form->field($model, 'cover')->textarea(['rows' => 1]) ?>
-
-    <?= $form->field($model, 'images')->textarea(['rows' => 1]) ?>
-
-    <?= $form->field($model, 'quality')->dropDownList([5 => 5, 4 => 4, 3 => 3, 2 => 2 ]) ?>
-    
+    <div class="row">
+    <div class="col-sm-6">    
+        <?= $form->field($model, 'cover_file')->fileInput() ?>
+        <img class="img-thumbnail" src="<?= Yii::$app->params['dir_img_book'].'thumbnail/'.$model->cover ?>"> 
+    </div>
+    <div class="col-sm-6">
+        <?= $form->field($model, 'place_id')->dropDownList($model->placeArr)->label('Место');?>
+    </div>
+    </div>
+        <?= $form->field($model, 'description')->textarea(['rows' => 9]) ?>
     </div>
     </div>
 
