@@ -49,6 +49,7 @@ class Catalog extends \yii\db\ActiveRecord
     public $format_view;
     public $author_view;
     public $user_view;
+    public $place_view;
     /**
      * {@inheritdoc}
      */
@@ -87,8 +88,8 @@ class Catalog extends \yii\db\ActiveRecord
             'description' => 'Описание',
             'section_id' => 'Section ID',
             'link_file' => 'Ссылка',
-            'year_made' => 'Год выпуска книги',
-            'year_writing' => 'Год написания книги',
+            'year_made' => 'Вып.',
+            'year_writing' => 'Нап.',
             'format_id' => 'Формат',
             'language' => 'Язык',
             'quantity' => 'Количество',
@@ -174,14 +175,20 @@ class Catalog extends \yii\db\ActiveRecord
     }
     
     public function beforeSave($insert)
-    {   
+    {
         if ($insert) {
+            // проверка на совпадение для исключения повтора
+            $match = Catalog::find()->where(['name' => $this->name])->one();
+            if ($match) {
+                echo 'Cовпадение ' . $this->name;
+                exit;
+            }
             $this->created_at = time();
         }
         $this->updated_at = time();
         return true;
     }
-    
+
     public function saveCover()
     {
         if ($this->cover) $this->deleteImg($this->cover);

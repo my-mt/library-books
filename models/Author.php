@@ -75,13 +75,18 @@ class Author extends \yii\db\ActiveRecord
         return $this->hasMany(Catalog::className(), ['author_id' => 'id']);
     }
     
-    public function saveModel($model)
+    public function beforeSave($insert)
     {
-        if (!$model->created_at)
-            $model->created_at = time();
-        $model->updated_at = time();
-        $model->user_id = Yii::$app->user->id;
-        if ($model->save())
-            return true;
+        if ($insert) {
+            // проверка на совпадение для исключения повтора
+            $match = Author::find()->where(['surname' => $this->surname])->one();
+            if ($match) {
+                echo 'Cовпадение ' . $this->surname;
+                exit;
+            }
+            $this->created_at = time();
+        }
+        $this->updated_at = time();
+        return true;
     }
 }

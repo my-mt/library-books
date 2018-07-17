@@ -52,8 +52,11 @@ class AuthorController extends BehaviorsController
     {
         $model = new Author();
 
-        if ($model->load(Yii::$app->request->post()) && $model->saveModel($model)) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->user_id = Yii::$app->user->id;
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
         return $this->render('create', [
@@ -72,7 +75,7 @@ class AuthorController extends BehaviorsController
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->saveModel($model)) {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

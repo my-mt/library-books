@@ -66,6 +66,9 @@ class CatalogController extends BehaviorsController
         if ($model->load(Yii::$app->request->post())) {
             $model->user_id = Yii::$app->user->id;
             if ($model->save()) {
+                if ($model->cover_file = UploadedFile::getInstance($model, 'cover_file')) {
+                    $model->saveCover();
+                }
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         }

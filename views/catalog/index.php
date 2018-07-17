@@ -5,6 +5,7 @@ use yii\grid\GridView;
 use app\models\Section;
 use app\models\Format;
 use app\models\Author;
+use app\models\Place;
 use yii\helpers\Url;
 
 /* @var $this yii\web\View */
@@ -33,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
               'label' => 'Раздел',
               'attribute' => 'section_view',
-              'filter' => Section::find()->select(['name'])->indexBy('name')->column(),
+              'filter' => Section::find()->select(['name'])->orderBy('name')->indexBy('name')->column(),
               'value' => 'section.name',
             ],
             [
@@ -63,7 +64,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             'name:ntext',
+            [
+              'label' => 'Место',
+              'attribute' => 'place_view',
+              'filter' => Place::find()->select(['place_name'])->orderBy('place_name')->indexBy('place_name')->column(),
+              'value' => 'place.place_name',
+            ],
             'year_made',
+            'year_writing',
             [
         	'label' => '',
 		'format' => 'raw',
