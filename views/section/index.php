@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\SectionSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Sections';
+$this->title = 'Разделы';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="section-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Section', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Создать раздел', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -28,8 +28,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'name:ntext',
             'parent_section_id',
-            'cover:ntext',
-            'description:ntext',
+//            'cover:ntext',
+//            'description:ntext',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

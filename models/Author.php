@@ -39,7 +39,7 @@ class Author extends \yii\db\ActiveRecord
         return [
             [['portrait', 'name', 'surname', 'patronymic', 'place_start', 'place_end', 'biography', 'works'], 'string'],
             [['date_start', 'date_end'], 'safe'],
-            [['user_id','name'], 'required'],
+            [['user_id','surname'], 'required'],
             [['created_at', 'updated_at', 'user_id'], 'integer'],
         ];
     }
@@ -51,19 +51,19 @@ class Author extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'portrait' => 'Portrait',
-            'name' => 'Name',
-            'surname' => 'Surname',
-            'patronymic' => 'Patronymic',
-            'date_start' => 'Date Start',
-            'place_start' => 'Place Start',
-            'date_end' => 'Date End',
-            'place_end' => 'Place End',
-            'biography' => 'Biography',
-            'works' => 'Works',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
-            'user_id' => 'User ID',
+            'portrait' => 'Портрет',
+            'name' => 'Имя',
+            'surname' => 'Фамилия',
+            'patronymic' => 'Отчество',
+            'date_start' => 'Дата рождения',
+            'place_start' => 'Место рождения',
+            'date_end' => 'Дата ухода',
+            'place_end' => 'Место ухода',
+            'biography' => 'Биография',
+            'works' => 'Работы',
+            'created_at' => 'Дата создания',
+            'updated_at' => 'Дата редактирования',
+            'user_id' => 'Пользователь',
         ];
     }
 

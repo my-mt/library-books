@@ -44,13 +44,13 @@ class Section extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'parent_section_id' => 'Parent Section ID',
-            'cover' => 'Cover',
-            'description' => 'Description',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
-            'user_id' => 'User ID',
+            'name' => 'Название',
+            'parent_section_id' => 'Родительский раздел ID',
+            'cover' => 'Обложка',
+            'description' => 'Описание',
+            'created_at' => 'Время создания',
+            'updated_at' => 'Время обновления',
+            'user_id' => 'Пользователь',
         ];
     }
 

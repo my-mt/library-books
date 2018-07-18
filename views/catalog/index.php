@@ -12,7 +12,7 @@ use yii\helpers\Url;
 /* @var $searchModel app\models\CatalogSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Catalogs';
+$this->title = 'Каталог';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="catalog-index">
@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Catalog', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить книгу', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([

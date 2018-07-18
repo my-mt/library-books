@@ -218,4 +218,12 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return $this->auth_key === $authKey;
     }
+    
+    public static function getUserbyId($id)
+    {
+        return static::findOne([
+            'id' => $id
+        ]); 
+    }
+
 }

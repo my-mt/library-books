@@ -42,45 +42,36 @@ use yii\widgets\ActiveForm;
     </select>
     </div>
 
-    
-
-
     <div class="row">
     <div class="col-sm-6">
         <?= $form->field($model, 'section_id')->dropDownList($model->sectionArr)->label('Раздел');?>
-    </div>
+    </div> 
     <div class="col-sm-6">
         <?= $form->field($model, 'link_file')->textarea(['rows' => 1]) ?>
     </div>
-
-     
-
     <div class="col-sm-6">
-        <?= $form->field($model, 'year_made')->textInput() ?>
+        <?= $form->field($model, 'year_made')->textInput()->label('Год выпуска') ?>
     </div>
     <div class="col-sm-6">
-        <?= $form->field($model, 'year_writing')->textInput() ?>
+        <?= $form->field($model, 'year_writing')->textInput()->label('Год написания') ?>
     </div>
-    
-        
     <div class="col-sm-6">
         <?= $form->field($model, 'format_id')->dropDownList($model->formatArr)->label('Формат');?>
-    </div>
+    </div> 
     <div class="col-sm-6">
         <?= $form->field($model, 'quantity')->textInput() ?>
     </div>
-        
     </div>
     </div>    
     
     <div class="col-sm-6">
     <div class="row">
     <div class="col-sm-6">    
-        <?= $form->field($model, 'cover_file')->fileInput() ?>
+        <?= $form->field($model, 'cover_file')->fileInput()->label('Обложка') ?>
         <img class="img-thumbnail" src="<?= Yii::$app->params['dir_img_book'].'thumbnail/'.$model->cover ?>"> 
     </div>
     <div class="col-sm-6">
-        <?= $form->field($model, 'place_id')->dropDownList($model->placeArr)->label('Место');?>
+        <?= $form->field($model, 'place_id')->dropDownList($model->placeArr)->label('Место нахождения книги');?>
     </div>
     </div>
         <?= $form->field($model, 'description')->textarea(['rows' => 9]) ?>
@@ -88,7 +79,7 @@ use yii\widgets\ActiveForm;
     </div>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
